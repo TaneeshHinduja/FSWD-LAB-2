@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input {
+            font-size: 16px;
+            padding: 8px;
+            margin: 5px;
+            width: 250px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Form Validation</h2>
+    <form onsubmit="return validateForm()">
+        <input type="text" id="name" placeholder="Enter your name"><br>
+        <span class="error" id="nameError"></span><br>
+
+        <input type="email" id="email" placeholder="Enter your email"><br>
+        <span class="error" id="emailError"></span><br>
+
+        <input type="password" id="password" placeholder="Enter your password"><br>
+        <span class="error" id="passwordError"></span><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let valid = true;
+
+            let nameRegex = /^[A-Za-z\s]{3,}$/;
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            let passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{6,}$/;
+
+            if (!nameRegex.test(name)) {
+                document.getElementById("nameError").textContent = "Name must have at least 3 letters.";
+                valid = false;
+            } else {
+                document.getElementById("nameError").textContent = "";
+            }
+
+            if (!emailRegex.test(email)) {
+                document.getElementById("emailError").textContent = "Enter a valid email.";
+                valid = false;
+            } else {
+                document.getElementById("emailError").textContent = "";
+            }
+
+            if (!passwordRegex.test(password)) {
+                document.getElementById("passwordError").textContent = "Password must be at least 6 characters, include 1 number, and 1 symbol.";
+                valid = false;
+            } else {
+                document.getElementById("passwordError").textContent = "";
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+</html>
