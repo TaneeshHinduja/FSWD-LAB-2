@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock with Changing Background</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            transition: background-color 1s ease;
+        }
+
+        #date,
+        #time {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .content {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div id="date"></div>
+        <div id="time"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            let now = new Date();
+            document.getElementById('date').textContent = now.toDateString();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function randomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function changeBackground() {
+            document.body.style.backgroundColor = randomColor();
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+        setInterval(changeBackground, 5000);
+    </script>
+</body>
+</html>
