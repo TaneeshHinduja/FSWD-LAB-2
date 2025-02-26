@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #container {
+            border: 2px solid black;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .card {
+            background-color: lightcoral;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>DOM Manipulation Example</h2>
+    <div id="container">
+        <p class="card">Hello, I am the first element!</p>
+    </div>
+    <br>
+    <button onclick="addNote()">Add Note</button>
+    <button onclick="removeNote()">Remove Note</button>
+    <button onclick="replaceNote()">Replace Note</button>
+
+    <script>
+        function addNote() {
+            let newNote = document.createElement("p");
+            newNote.textContent = "📝 New Note Added!";
+            newNote.className = "card";
+            document.getElementById("container").appendChild(newNote);
+        }
+
+        function removeNote() {
+            let container = document.getElementById("container");
+            if (container.children.length > 0) {
+                container.removeChild(container.lastElementChild);
+            } else {
+                alert("No more notes to remove!");
+            }
+        }
+
+        function replaceNote() {
+            let container = document.getElementById("container");
+            if (container.children.length > 0) {
+                let newNote = document.createElement("p");
+                newNote.textContent = "🔄 This note replaced the first one!";
+                newNote.className = "card";
+                container.replaceChild(newNote, container.children[0]);
+            } else {
+                alert("No notes available to replace!");
+            }
+        }
+    </script>
+
+</body>
+</html>
